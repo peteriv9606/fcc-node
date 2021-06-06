@@ -43,4 +43,15 @@ app.get("/:word/echo", (req, res) => {
     echo: word,
   });
 });
+
+app.get("/name", (req, res) => {
+  var fName = req.query.first;
+  var lName = req.query.last;
+  res.send({ name: fName + " " + lName });
+});
+
+//app.route(path).get(handler).post(handler)
+/* app.get("/name", (req, res) => {
+  res.send({ name: "firstname lastname" });
+}); */
 module.exports = app;
