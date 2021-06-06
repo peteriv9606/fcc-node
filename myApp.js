@@ -7,7 +7,7 @@ var assets = __dirname + "/public";
 app.use("/public", express.static(assets));
 var home = __dirname + "/views/index.html";
 
-app.use((req, next) => {
+app.use((req, res, next) => {
   console.log(req.method, req.path, "-", req.ip);
   next();
 });
@@ -27,7 +27,7 @@ app.get("/json", (res) => {
 
 app.get(
   "/now",
-  (req, next) => {
+  (req, res, next) => {
     req.time = new Date().toString();
     console.log(req.time);
     next();
