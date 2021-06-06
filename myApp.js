@@ -1,3 +1,5 @@
+console.log("SERVER IS RUNNING");
+require("dotenv").config();
 var express = require("express");
 var app = express();
 const mySecret = process.env["MESSAGE_STYLE"];
@@ -16,5 +18,4 @@ app.get("/json", function (req, res) {
     res.json({ message: response });
   }
 });
-
 module.exports = app;
