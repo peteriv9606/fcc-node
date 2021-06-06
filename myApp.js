@@ -12,11 +12,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (res) => {
+app.get("/", (req, res) => {
   res.sendFile(home);
 });
 
-app.get("/json", (res) => {
+app.get("/json", (req, res) => {
   var response = "Hello json";
   if (process.env.MESSAGE_STYLE == "uppercase") {
     res.json({ message: response.toUpperCase() });
