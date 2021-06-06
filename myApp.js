@@ -6,8 +6,10 @@ const mySecret = process.env["MESSAGE_STYLE"];
 var assets = __dirname + "/public";
 app.use("/public", express.static(assets));
 var home = __dirname + "/views/index.html";
-app.get("/", function (req, res) {
+
+app.get("/", (req, res) => {
   console.log(req.method, req.path, "-", req.ip);
+
   res.sendFile(home);
 });
 app.get("/json", function (req, res) {
