@@ -7,15 +7,16 @@ var assets = __dirname + "/public";
 app.use("/public", express.static(assets));
 var home = __dirname + "/views/index.html";
 
-app.use((req, res, next) => {
+app.use((req, next) => {
   console.log(req.method, req.path, "-", req.ip);
   next();
 });
 
-app.get("/", (req, res, next) => {
+app.get("/", (res) => {
   res.sendFile(home);
 });
-app.get("/json", function (req, res) {
+
+app.get("/json", (res) => {
   var response = "Hello json";
   if (process.env.MESSAGE_STYLE == "uppercase") {
     res.json({ message: response.toUpperCase() });
@@ -23,4 +24,16 @@ app.get("/json", function (req, res) {
     res.json({ message: response });
   }
 });
+
+app.get(
+  "/now",
+  (req, next) => {
+    req.time = new Date().toString();
+    console.log(req.time);
+    next();
+  },
+  (req, res) => {
+    res.send({ time: req.time });
+  }
+);
 module.exports = app;
