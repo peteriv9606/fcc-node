@@ -8,18 +8,13 @@ app.get("/", function (req, res) {
   res.sendFile(home);
 });
 app.get("/json", function (req, res) {
-  var respone = "Hello JSON";
+  var response = "Hello JSON";
   if (process.env.MESSAGE_STYLE == "uppercase") {
     response = response.toUpperCase();
     res.json({ message: response });
   } else {
     res.json({ message: response });
   }
-});
-app.get("/json", function (req, res) {
-  var respone = "Hello JSON";
-
-  res.json({ message: response });
 });
 
 module.exports = app;
