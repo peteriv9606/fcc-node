@@ -6,7 +6,6 @@ app.use("/public", express.static(assets));
 var home = __dirname + "/views/index.html";
 app.get("/", function (req, res) {
   res.sendFile(home);
-  console.log("CONNECTED TO HEROKU, SUCCESSFULL UPDATE!!!!!!");
 });
 app.get("/json", function (req, res) {
   var respone = "Hello JSON";
