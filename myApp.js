@@ -51,12 +51,10 @@ app.get("/:word/echo", (req, res) => {
 app
   .route("/name")
   .get((req, res) => {
-    var fName = req.query.first;
-    var lName = req.query.last;
-    res.send({ name: fName + " " + lName });
+    res.send({ name: req.query.first + " " + req.query.last });
   })
   .post((req, res) => {
-    res.send(req.body);
+    res.send({ name: req.body.first + " " + req.body.last });
   });
 
 module.exports = app;
