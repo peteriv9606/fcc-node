@@ -1,3 +1,4 @@
+var bodyParser = require("body-parser");
 console.log("SERVER IS RUNNING");
 require("dotenv").config();
 var express = require("express");
@@ -11,6 +12,8 @@ app.use((req, res, next) => {
   console.log(req.method, req.path, "-", req.ip);
   next();
 });
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.sendFile(home);
@@ -44,14 +47,16 @@ app.get("/:word/echo", (req, res) => {
   });
 });
 
-app.get("/name", (req, res) => {
-  var fName = req.query.first;
-  var lName = req.query.last;
-  res.send({ name: fName + " " + lName });
-});
+//a better way to structure a get/post request - show the path, then decide what to do if GET/POST;
+app
+  .route("/name")
+  .get((req, res) => {
+    var fName = req.query.first;
+    var lName = req.query.last;
+    res.send({ name: fName + " " + lName });
+  })
+  .post((req, res) => {
+    res.send(req.body);
+  });
 
-//app.route(path).get(handler).post(handler)
-/* app.get("/name", (req, res) => {
-  res.send({ name: "firstname lastname" });
-}); */
 module.exports = app;
